@@ -6,7 +6,6 @@ module.exports = app => {
 
   const { check } = require('express-validator');
 
-
   router.post("/login", [
     check('email', 'Enter valid email').isEmail(),
     check('password', 'Password length should be 6').isLength({ min: 6 })
@@ -18,6 +17,8 @@ module.exports = app => {
   ], auth.register);
 
   router.put("/update/:id", VerifyToken, auth.update);
+
+  router.post("/imageUpload", VerifyToken, auth.import);
 
   app.use('/api/', router);
 };
