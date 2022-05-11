@@ -1,0 +1,121 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TASK Profile",
+		"_postman_id": "e8e76302-68c0-c873-462f-674266cef9cc",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login / register",
+			"description": "",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"url": "{{baseUrl}}login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"alagu@gmail.com\",\n\t\"password\" : \"1234567\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"url": "{{baseUrl}}register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"alagu@gmail.com\",\n\t\"password\" : \"1234567\",\n\t\"name\" : \"alagu\",\n\t\"mobileno\":\"9876543210\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "customer",
+			"description": "",
+			"item": [
+				{
+					"name": "customer update",
+					"request": {
+						"url": "{{baseUrl}}update/627a65fb14891a03a07970d2",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\" : \"alagu@gmail.com\",\n\t\"password\" : \"1234567\",\n\t\"name\" : \"alagu\",\n\t\"mobileno\":\"9876543217\",\n\t\"age\":\"24\",\n\t\"height\":\"165cm\",\n\t\"weight\":\"65\",\n\t\"martialstatus\":\"single\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "image upload",
+					"request": {
+						"url": "{{baseUrl}}imageUpload",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": "",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profile_image",
+									"description": "",
+									"type": "file",
+									"src": "download.jpg"
+								}
+							]
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
