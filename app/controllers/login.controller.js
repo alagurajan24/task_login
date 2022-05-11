@@ -179,24 +179,24 @@ exports.update = (req, res) => {
 
 exports.import = (req, res) => {
     var upload = multer({ storage: storage }).single("profile_image");
-    console.log(upload, 'upload')
-
     upload(req, res, (err) => {
         if (err) {
             res.status(400).send("Something went wrong!");
         }
         res.send(req.file);
-    });   
+    });
 };
 
 var path = "C:/xampp/htdocs/api-php/task_login/uploads/"
-    global.__basedir = __dirname;
-    var storage = multer.diskStorage({   
-        destination: function(req, file, cb) { 
-           cb(null, path);    
-        }, 
-        filename: function (req, file, cb) { 
-           cb(null , file.originalname);   
-        }
-     });
+global.__basedir = __dirname;
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, path);
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname);
+    }
+});
+
+
 
