@@ -133,7 +133,7 @@ exports.list = async (req, res) => {
     // });
     console.log(search, 'search')
     if (search != undefined && search != '') {
-        Address.find({ $text: { $search: search } }).limit(limit).skip(skip).sort(sort).exec((err, docs) => {
+        Address.find({ $text: { $search: search } , status: { $ne: 2 }}).limit(limit).skip(skip).sort(sort).exec((err, docs) => {
             res.send({
                 status: 'success',
                 message: 'Address listed successfully',
@@ -142,8 +142,7 @@ exports.list = async (req, res) => {
         });
     } else {
         // Address.find().limit(limit).skip(skip).sort(sort).exec((err, docs) => {
-        Address.find().exec((err, docs) => {
-            console.log(docs, 'docs')
+        Address.find( {status: { $ne: 2 }} ).exec((err, docs) => {
             res.send({
                 status: 'success',
                 message: 'Address listed successfully',
