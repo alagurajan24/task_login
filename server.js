@@ -45,7 +45,7 @@ app.listen(PORT, () => {
 });
 
 require("./app/routes/login.routes")(app);
-
+require("./app/routes/address.routes")(app);
 
 
 

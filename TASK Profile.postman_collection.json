@@ -8,6 +8,166 @@
 	},
 	"item": [
 		{
+			"name": "address",
+			"description": "",
+			"item": [
+				{
+					"name": "address create",
+					"request": {
+						"url": "{{baseUrl}}address/create",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"alagu\",\n\t\"mobileno\" :\"9876543210\",\n\t\"address\" : \"123, xyz\",\n\t\"city\" : \"Madurai\",\n\t\"state\" : \"Tamilnadu\",\n\t\"pincode\" : \"625001\",\n\t\"landmark\" : \"near bus stand\",\n\t\"addressType\" : \"Home\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "address delete",
+					"request": {
+						"url": "{{baseUrl}}address/delete",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id\" : \"627cafc7d914a0284c5bcf90\"\n}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "address update",
+					"request": {
+						"url": "{{baseUrl}}address/update/627cafc7d914a0284c5bcf90",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"name\" : \"rajan\",\n\t\"mobileno\" :\"9876543210\",\n\t\"address\" : \"123, xyz\",\n\t\"city\" : \"Madurai\",\n\t\"state\" : \"Tamilnadu\",\n\t\"pincode\" : \"625001\",\n\t\"landmark\" : \"near bus stand\",\n\t\"addressType\" : \"Home\"\n}"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "address list",
+					"request": {
+						"url": {
+							"raw": "{{baseUrl}}address/list",
+							"host": [
+								"{{baseUrl}}address"
+							],
+							"path": [
+								"list"
+							],
+							"query": [
+								{
+									"key": "sortType",
+									"value": "ASC",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "sortKey",
+									"value": "",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								},
+								{
+									"key": "skip",
+									"value": "1",
+									"equals": true,
+									"description": "",
+									"disabled": true
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"orderNo\" : \"003\",\n\t\"orderAmount\" :  \"200.00\",\n\t\"orderDetail\" : [\n\t\t{\n    \t\t\"productId\": \"60cb1610f5b86b15cf57380b\",\n    \t\t\"qty\": 1,\n    \t\t\"price\": \"100.00\"\n\t\t},\n\t\t{\n    \t\t\"productId\": \"60cb1610f5b86b15cf57380d\",\n    \t\t\"qty\": 2,\n    \t\t\"price\": \"400.00\"\n\t\t}\n\t]\n}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				},
+				{
+					"name": "getidaddress",
+					"request": {
+						"url": "{{baseUrl}}address/getByaddress/627cafc7d914a0284c5bcf90",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "{{token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"orderNo\" : \"003\",\n\t\"orderAmount\" :  \"200.00\",\n\t\"orderDetail\" : [\n\t\t{\n    \t\t\"productId\": \"60cb1610f5b86b15cf57380b\",\n    \t\t\"qty\": 1,\n    \t\t\"price\": \"100.00\"\n\t\t},\n\t\t{\n    \t\t\"productId\": \"60cb1610f5b86b15cf57380d\",\n    \t\t\"qty\": 2,\n    \t\t\"price\": \"400.00\"\n\t\t}\n\t]\n}\n"
+						},
+						"description": ""
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "login / register",
 			"description": "",
 			"item": [
