@@ -187,7 +187,7 @@ exports.import = (req, res) => {
     });
 };
 
-var path = "C:/xampp/htdocs/api-php/task_login/uploads/"
+var path = "C:/Node/task_login/uploads/"
 global.__basedir = __dirname;
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
