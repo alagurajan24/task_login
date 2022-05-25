@@ -2,6 +2,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const db = require("../models");
 const multer = require('multer');
+const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
+const CryptoJS = require("crypto-js");
 const { validationResult } = require('express-validator');
 const Customer = db.customer;
 var status = 'failed';
@@ -60,10 +63,10 @@ exports.register = (req, res) => {
         });
     }
     Customer.findOne({ email: req.body.email }, function (err, customer) {
+        data: data
         if (err) return res.status(500).send({
             status: status,
             message: 'Something went wrong',
-            data: data
         });
         if (customer) return res.status(500).send({
             status: status,
@@ -100,6 +103,47 @@ exports.register = (req, res) => {
                     var token = jwt.sign({ id: user._id }, 'admin', {
                         expiresIn: 86400 // expires in 24 hours
                     });
+
+                    //mail sent
+                    const transporter = nodemailer.createTransport({
+                        host: process.env.MAIL_HOST,
+                        port: process.env.MAIL_PORT,
+                        auth: {
+                            user: process.env.MAIL_SENDER,
+                            pass: process.env.MAIL_PASSWORD
+                        }
+                    });
+
+                    // send email
+                    var hashData = encrypt([{ name: req.body.name, email: req.body.email }]);
+
+                    function encrypt(data) {
+                        var ciphertextreplace = CryptoJS.AES.encrypt(JSON.stringify(data), 'secret key 123').toString();
+                        console.log(ciphertextreplace, 'txt!!!!!')
+                        var ciphertext = ciphertextreplace.replaceAll("/", "$");
+
+                        return ciphertext;
+                    }
+
+                    // const url = 'http://localhost:8080/api/customers?name=' + hashname + '&email=' + hashemail;
+                    const url = 'http://localhost:8080/api/customers/' + hashData;
+                    console.log(url, 'urlll')
+
+                    var mailOptions = {
+                        from: process.env.MAIL_SENDER,
+                        to: req.body.email,
+                        subject: 'Test Email Subject',
+                        html: 'please click this email confirmation link: ' + url
+                    };
+
+                    transporter.sendMail(mailOptions, function (error, info) {
+                        if (error) {
+                            console.log(error);
+                        } else {
+                            console.log('Email sent: ' + info.response);
+                        }
+                    });
+
                     res.status(200).send({
                         status: 'success',
                         message: 'Register successfully',
@@ -110,9 +154,7 @@ exports.register = (req, res) => {
                     });
                 });
         });
-
     });
-
 };
 
 exports.update = (req, res) => {
@@ -174,8 +216,24 @@ exports.update = (req, res) => {
                 })
         });
     });
-
 }
+
+exports.customerList = (req, res) => {
+
+    let ciphertext = req.params.data;
+
+    //string replace
+    var ciphertextrplce = ciphertext.replaceAll('$', '/');
+
+    var decrypted = CryptoJS.AES.decrypt(ciphertextrplce, 'secret key 123').toString(CryptoJS.enc.Utf8);
+    var decryptObj = JSON.parse(decrypted);
+
+    res.send({
+        status: 'success',
+        message: 'customer listed successfully',
+        data: decryptObj
+    });
+};
 
 exports.import = (req, res) => {
     var upload = multer({ storage: storage }).single("profile_image");

@@ -20,5 +20,7 @@ module.exports = app => {
 
   router.post("/imageUpload", VerifyToken, auth.import);
 
+  router.get("/customers/:data", auth.customerList);
+
   app.use('/api/', router);
 };
